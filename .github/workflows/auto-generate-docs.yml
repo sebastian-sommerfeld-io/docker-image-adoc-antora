@@ -38,7 +38,7 @@ jobs:
             echo
             cat docs/modules/ROOT/partials/install-usage.adoc
             echo
-            cat docs/modules/ROOT/partials/risks-tachnical-debts.adoc
+            cat docs/modules/ROOT/partials/risks-technical-debts.adoc
             echo
             cat docs/modules/ROOT/partials/contact.adoc
             echo
