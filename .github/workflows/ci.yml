@@ -97,9 +97,9 @@ jobs:
         with:
           ignore_paths: node_modules target
 
-  docker-ci-builds:
+  ci-build:
     runs-on: ubuntu-latest
-    needs: update-linter-rules
+    needs: [lint-yaml, lint-json, lint-env-files, lint-folders, lint-filenames, shellcheck]
     permissions:
       contents: read
       security-events: write
