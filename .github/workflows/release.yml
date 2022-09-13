@@ -27,14 +27,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Re-Tag image sommerfeldio/adoc-antora from :ci-build to :${{ steps.vars.outputs.tag }} and :latest
+      - name: Re-Tag image sommerfeldio/adoc-antora from :release-candidate to :${{ steps.vars.outputs.tag }} and :latest
         run: |
           VERSION_TAG="$(cut -d "v" -f2 <<< ${{ steps.vars.outputs.tag }})"
 
-          docker pull sommerfeldio/adoc-antora:ci-build
+          docker pull sommerfeldio/adoc-antora:release-candidate
 
-          docker tag sommerfeldio/adoc-antora:ci-build sommerfeldio/adoc-antora:latest
-          docker tag sommerfeldio/adoc-antora:ci-build sommerfeldio/adoc-antora:$VERSION_TAG
+          docker tag sommerfeldio/adoc-antora:release-candidate sommerfeldio/adoc-antora:latest
+          docker tag sommerfeldio/adoc-antora:release-candidate sommerfeldio/adoc-antora:$VERSION_TAG
 
           docker push sommerfeldio/adoc-antora:latest
           docker push sommerfeldio/adoc-antora:$VERSION_TAG
