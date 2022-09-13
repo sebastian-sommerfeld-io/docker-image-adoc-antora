@@ -1,4 +1,4 @@
-= Docker Image adoc-antora
+= Docker Image: adoc-antora
 include::ROOT:partial$intro-vars.adoc[]
 
 include::ROOT:partial$intro.adoc[]
