@@ -1,0 +1,40 @@
+---
+name: Release
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  docker-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get current tag name
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Re-Tag image sommerfeldio/adoc-antora from :ci-build to :${{ steps.vars.outputs.tag }} and :latest
+        run: |
+          VERSION_TAG="$(cut -d "v" -f2 <<< ${{ steps.vars.outputs.tag }})"
+
+          docker pull sommerfeldio/adoc-antora:ci-build
+
+          docker tag sommerfeldio/adoc-antora:ci-build sommerfeldio/adoc-antora:latest
+          docker tag sommerfeldio/adoc-antora:ci-build sommerfeldio/adoc-antora:$VERSION_TAG
+
+          docker push sommerfeldio/adoc-antora:latest
+          docker push sommerfeldio/adoc-antora:$VERSION_TAG
