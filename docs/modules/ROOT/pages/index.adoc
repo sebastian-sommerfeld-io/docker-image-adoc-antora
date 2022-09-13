@@ -1,0 +1,14 @@
+= Docker Image adoc-antora
+include::ROOT:partial$intro-vars.adoc[]
+
+include::ROOT:partial$intro.adoc[]
+
+include::ROOT:partial$building-blocks.adoc[]
+
+include::ROOT:partial$requirements-quality-goals.adoc[]
+
+include::ROOT:partial$install-usage.adoc[]
+
+include::ROOT:partial$risks-technical-debts.adoc[]
+
+include::ROOT:partial$contact.adoc[]

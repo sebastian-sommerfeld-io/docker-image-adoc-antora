@@ -1,0 +1,11 @@
+== Install
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+=== DockerHub Settings
+. Go to "link:https://hub.docker.com[hub.docker.com] -> Account Settings -> Security" and set up an Access Token to use with Github Actions.
+. Go to "link:https://github.com/sebastian-sommerfeld-io/docker-images[repository "docker-images" on github.com] -> Settings -> Secrets -> Actions and add two secrets to log in to DockerHub in a Github Actions pipeline
+.. DOCKERHUB_USER = `sommerfeldio`
+.. DOCKERHUB_USER = `<THE_TOKEN_FROM_DOCKERHUB>`
+
+== Usage
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.

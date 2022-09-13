@@ -1,0 +1,13 @@
+== Requirements Overview
+These requirements apply to all docker images on top of their own requirements.
+
+. Image is pushed to DockerHub
+. Apply the versioning scheme defined in link:http://localhost:7888/infrastructure-docs/main/GUIDELINES/index.html#_version_tags[Guidelines and Conventions]
+
+== Quality Goals
+. Run test, scans and validations automatically with Github Actions
+.. Everything inside this repo is linted and validated
+.. Docker builds are tested regularly
+.. Container images are scanned for vulerabilities
+. Development with Gitpod inside a browser is possible.
+. Every service runs inside a Docker container.
