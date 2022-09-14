@@ -102,13 +102,13 @@ jobs:
     needs: update-linter-rules
     steps:
       - name: hadolint
-        uses: hadolint/hadolint-action@f988afea3da57ee48710a9795b6bb677cc901183
+        uses: hadolint/hadolint-action@v2.0.0
         with:
-          dockerfile: ./src/main/Dockerfile
+          dockerfile: src/main/Dockerfile
 
   ci-build:
     runs-on: ubuntu-latest
-    needs: [lint-yaml, lint-json, lint-env-files, lint-folders, lint-filenames, shellcheck]
+    needs: [lint-yaml, lint-dockerfile]
     permissions:
       contents: read
       security-events: write
