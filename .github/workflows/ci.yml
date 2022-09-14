@@ -108,6 +108,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set default docker tag (main or feature branch)
+        # if: contains(github.ref, 'refs/heads/feat/')
+        id: vars
+        run: echo ::set-output name=DOCKER_TAG::ci-build
+
+      - name: Override docker tag (release branch)
+        if: contains(github.ref, 'refs/heads/release/')
+        id: vars
+        run: echo ::set-output name=DOCKER_TAG::release-candidate
+
       - name: hadolint
         uses: hadolint/hadolint-action@f988afea3da57ee48710a9795b6bb677cc901183
         with:
@@ -128,41 +138,35 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: CI-Build (feature branch)
-        if: contains(github.ref, 'refs/heads/feat/')
+      - name: Docker image CI build (tag = ${{ steps.vars.outputs.DOCKER_TAG }})
         uses: docker/build-push-action@v3
         with:
           context: ./src/main
           platforms: linux/amd64, linux/arm64
           push: true
-          tags: sommerfeldio/adoc-antora:ci-build
+          tags: sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }}
 
-      - name: CI-Build (release branch)
-        if: contains(github.ref, 'refs/heads/release/')
-        uses: docker/build-push-action@v3
-        with:
-          context: ./src/main
-          platforms: linux/amd64, linux/arm64
-          push: true
-          tags: sommerfeldio/adoc-antora:release-candidate
-
-      - name: Run Snyk to check Docker image for vulnerabilities (feature branch)
-        if: contains(github.ref, 'refs/heads/feat/')
+      - name: Run Snyk to check Docker image for vulnerabilities (tag = ${{ steps.vars.outputs.DOCKER_TAG }})
         continue-on-error: true
         uses: snyk/actions/docker@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          image: sommerfeldio/adoc-antora:ci-build
+          image: sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }}
           args: --file=src/main/Dockerfile
+
+      - name: Show files
+        run: ls -alF
 
       - name: Merge sarif results
         uses: microsoft/sarif-actions@v0.1
         with:
           command: merge *.sarif --output-file=merged-result.sarif
 
+      - name: Show files
+        run: ls -alF
+
       - name: Upload snyk and hadolint result to GitHub Code Scanning (feature branch)
-        if: contains(github.ref, 'refs/heads/feat/')
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: merged-result.sarif
