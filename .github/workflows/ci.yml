@@ -113,14 +113,8 @@ jobs:
         with:
           dockerfile: ./src/main/Dockerfile
           format: sarif
-          output-file: hadolint-results.sarif
+          output-file: hadolint.sarif
           no-fail: true
-
-      - name: Upload hadolint results to GitHub
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: hadolint-results.sarif
-          wait-for-processing: true
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -134,7 +128,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: CI-Build for feature branch
+      - name: CI-Build (feature branch)
         if: contains(github.ref, 'refs/heads/feat/')
         uses: docker/build-push-action@v3
         with:
@@ -143,7 +137,7 @@ jobs:
           push: true
           tags: sommerfeldio/adoc-antora:ci-build
 
-      - name: CI-Build for release branch
+      - name: CI-Build (release branch)
         if: contains(github.ref, 'refs/heads/release/')
         uses: docker/build-push-action@v3
         with:
@@ -151,3 +145,26 @@ jobs:
           platforms: linux/amd64, linux/arm64
           push: true
           tags: sommerfeldio/adoc-antora:release-candidate
+
+      - name: Run Snyk to check Docker image for vulnerabilities (feature branch)
+        if: contains(github.ref, 'refs/heads/feat/')
+        # Snyk can be used to break the build when it detects vulnerabilities.
+        # In this case we want to upload the issues to GitHub Code Scanning
+        continue-on-error: true
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: sommerfeldio/adoc-antora:ci-build
+
+      - name: Upload snyk result to GitHub Code Scanning (feature branch)
+        if: contains(github.ref, 'refs/heads/feat/')
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk.sarif
+
+      - name: Upload hadolint results to GitHub
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: hadolint.sarif
+          wait-for-processing: true
