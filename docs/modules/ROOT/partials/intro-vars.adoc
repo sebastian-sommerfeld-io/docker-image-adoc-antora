@@ -1,4 +1,5 @@
-:project-name: docker-image-adoc-antora
+:image-name: docker-image-adoc-antora
+:project-name: docker-image-{image-name}
 :url-project: https://github.com/sebastian-sommerfeld-io/{project-name}
 :github-actions-url: {url-project}/actions/workflows
 :job-ci: ci.yml

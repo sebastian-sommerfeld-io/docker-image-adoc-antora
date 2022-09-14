@@ -9,6 +9,7 @@ image:{github-actions-url}/{job-release}/{badge}[Github Badge, link={github-acti
 |What |Where to find
 |Repository |{url-project}
 |Documentation |https://docs.cloud.sommerfeld.io/{project-name}-docs/main
+|Docker Registry |https://hub.docker.com/r/sommerfeldio/adoc-antora
 |===
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+This image is used to for link:https://docs.cloud.sommerfeld.io[docs.cloud.sommerfeld.io]. See https://github.com/sebastian-sommerfeld-io/website-sommerfeld-io for details.
