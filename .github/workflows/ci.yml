@@ -156,15 +156,14 @@ jobs:
           image: sommerfeldio/adoc-antora:ci-build
           args: --file=src/main/Dockerfile
 
-      - name: Upload snyk result to GitHub Code Scanning (feature branch)
+      - name: Merge sarif results
+        uses: microsoft/sarif-actions@v0.1
+        with:
+          command: merge *.sarif --output-file=merged-result.sarif
+
+      - name: Upload snyk and hadolint result to GitHub Code Scanning (feature branch)
         if: contains(github.ref, 'refs/heads/feat/')
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: snyk.sarif
-          wait-for-processing: true
-
-      - name: Upload hadolint results to GitHub
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: hadolint.sarif
+          sarif_file: merged-result.sarif
           wait-for-processing: true
