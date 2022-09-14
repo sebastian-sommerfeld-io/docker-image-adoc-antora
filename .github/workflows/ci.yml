@@ -110,7 +110,7 @@ jobs:
 
   ci-build:
     runs-on: ubuntu-latest
-    needs: [lint-yaml, lint-dockerfile]
+    needs: lint-dockerfile
     permissions:
       contents: read
       security-events: write
