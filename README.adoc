@@ -57,6 +57,13 @@ These requirements apply to all docker images on top of their own requirements.
 .. DOCKERHUB_USER = `sommerfeldio`
 .. DOCKERHUB_USER = `<THE_TOKEN_FROM_DOCKERHUB>`
 
+=== Container Scanning with Snyk
+In order to use the Snyk Action you will need to have a Snyk API token. More details in https://github.com/snyk/actions#getting-your-snyk-token or you can signup for free at https://snyk.io/login.
+
+. Create a `SNYK_TOKEN` secret in Github the same way you created the DockerHub secrets.
+
+Snyk can be used to break the build when it detects vulnerabilities. In this case we want to `continue-on-error: true` to upload the issues to GitHub Code Scanning.
+
 // == Usage
 // Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
