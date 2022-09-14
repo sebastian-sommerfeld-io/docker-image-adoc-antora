@@ -9,7 +9,7 @@ image:{github-actions-url}/{job-release}/{badge}[Github Badge, link={github-acti
 |What |Where to find
 |Repository |{url-project}
 |Documentation |https://docs.cloud.sommerfeld.io/{project-name}-docs/main
-|Docker Registry |https://hub.docker.com/r/sommerfeldio/adoc-antora
+|Docker Registry |https://hub.docker.com/r/sommerfeldio/{image-name}
 |===
 
 This image is used to for link:https://docs.cloud.sommerfeld.io[docs.cloud.sommerfeld.io]. See https://github.com/sebastian-sommerfeld-io/website-sommerfeld-io for details.
