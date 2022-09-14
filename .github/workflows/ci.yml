@@ -108,15 +108,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set default docker tag (main or feature branch)
-        # if: contains(github.ref, 'refs/heads/feat/')
+      - name: Set docker tag ('ci-build' for main or feature branch, 'release-candidate' for release branch)
         id: vars
-        run: echo ::set-output name=DOCKER_TAG::ci-build
+        run: |
+          echo ${{ github.ref }}
 
-      - name: Override docker tag (release branch)
-        if: contains(github.ref, 'refs/heads/release/')
-        id: vars
-        run: echo ::set-output name=DOCKER_TAG::release-candidate
+          TAG='ci-build'
+          REF='refs/heads/release/'
+
+          if [[ ${{ github.ref }} == *${REF}* ]]; then
+            TAG='release-candidate'
+          fi
+
+          echo "::set-output name=DOCKER_TAG::$TAG"
 
       - name: hadolint
         uses: hadolint/hadolint-action@f988afea3da57ee48710a9795b6bb677cc901183
