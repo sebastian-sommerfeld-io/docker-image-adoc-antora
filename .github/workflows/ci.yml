@@ -167,3 +167,41 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: snyk.sarif
+
+  post-build-tests:
+    runs-on: ubuntu-latest
+    needs: ci-build
+    permissions:
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Run container and print version -> 
+        run: |
+          echo "Todo ..."
+          echo "Docker pull ..."
+          echo "Docker run ... antora --version"
+
+      - name: Run container and print version ->antora-site-generator
+        run: |
+          echo "Todo ..."
+          echo "Docker pull ..."
+          echo "Docker run ... antora --version"
+
+      - name: Run container and print version -> asciidoctor
+        run: |
+          echo "Todo ..."
+          echo "Docker pull ..."
+          echo "Docker run ... asciidoctor --version"
+
+      - name: Run container and print version -> asciidoctor-kroki
+        run: |
+          echo "Todo ..."
+          echo "Docker pull ..."
+          echo "Docker run ... asciidoctor-kroki --version"
+
+      - name: Run container and print version -> gulp-cli
+        run: |
+          echo "Todo ..."
+          echo "Docker pull ..."
+          echo "Docker run ... gulp-cli --version"
