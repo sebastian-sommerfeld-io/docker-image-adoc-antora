@@ -6,6 +6,10 @@ on:
     tags:
       - v*
 
+concurrency: 
+  group: ${{github.ref}}
+  cancel-in-progress: true
+
 jobs:
   docker-release:
     runs-on: ubuntu-latest
