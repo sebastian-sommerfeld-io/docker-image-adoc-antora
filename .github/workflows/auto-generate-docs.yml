@@ -21,7 +21,7 @@ jobs:
         run: |
           echo '= Docker Image: adoc-antora' > README.adoc
           {
-            cat docs/modules/ROOT/partials/intro-vars.adoc
+            cat docs/modules/ROOT/partials/vars.adoc
             echo
             echo "// ================================="
             echo "// DO NOT EDIT DIRECTLY !!!!!"
@@ -30,17 +30,7 @@ jobs:
             echo "// Contents are based on Antora docs"
             echo "// ================================="
             echo
-            cat docs/modules/ROOT/partials/intro.adoc
-            echo
-            cat docs/modules/ROOT/partials/building-blocks.adoc
-            echo
-            cat docs/modules/ROOT/partials/requirements-quality-goals.adoc
-            echo
-            cat docs/modules/ROOT/partials/install-usage.adoc
-            echo
-            cat docs/modules/ROOT/partials/risks-technical-debts.adoc
-            echo
-            cat docs/modules/ROOT/partials/contact.adoc
+            cat docs/modules/ROOT/partials/README.adoc
             echo
           } >> README.adoc
 
