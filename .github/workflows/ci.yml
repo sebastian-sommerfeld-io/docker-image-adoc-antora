@@ -12,7 +12,7 @@ on:
 permissions:
   contents: read
 
-concurrency: 
+concurrency:
   group: ${{github.ref}}
   cancel-in-progress: true
 
@@ -180,7 +180,7 @@ jobs:
       security-events: write
 
     steps:
-      - name: Run container and print version -> 
+      - name: Run container and print version -> antora
         run: |
           echo "Todo ..."
           echo "Docker pull ..."
