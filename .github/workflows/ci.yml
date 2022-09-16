@@ -180,11 +180,11 @@ jobs:
 
       - name: Convert README from asciidoc to markdown for DockerHub description
         run: |
-          apt-get install -y pandoc asciidoc
+          sudo apt-get install -y pandoc asciidoc
           asciidoc -b docbook README.adoc
           pandoc -f docbook -t markdown_strict README.xml -o README.md
 
-      - name: Update Docker Hub description
+      - name: Update DockerHub description
         uses: peter-evans/dockerhub-description@v3
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
