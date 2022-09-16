@@ -120,6 +120,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set docker tag ('ci-build' for main or feature branch, 'release-candidate' for release branch)
+        id: vars
         run: |
           echo ${{ github.ref }}
 
@@ -154,7 +155,6 @@ jobs:
           tags: sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }}
 
       - name: Run container and print versions of installed packages
-        id: vars
         run: |
           # docker pull sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }}
 
