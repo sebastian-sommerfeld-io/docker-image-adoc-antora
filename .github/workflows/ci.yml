@@ -177,18 +177,3 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: snyk.sarif
-
-      - name: Convert README from asciidoc to markdown for DockerHub description
-        run: |
-          sudo apt-get install -y pandoc asciidoc
-          asciidoc -b docbook README.adoc
-          pandoc -f docbook -t markdown_strict README.xml -o README.md
-
-      - name: Update DockerHub description
-        uses: peter-evans/dockerhub-description@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USER }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: sommerfeldio/adoc-antora
-          short-description: ${{ github.event.repository.description }}
-          readme-filepath: ./README.md
