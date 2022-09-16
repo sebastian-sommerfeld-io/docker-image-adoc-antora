@@ -158,11 +158,11 @@ jobs:
         run: |
           # docker pull sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }}
 
-          docker run -it sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }} npm list -g --depth=0
+          docker run -i sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }} npm list -g --depth=0
 
-          docker run -it sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }} antora --version
-          docker run -it sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }} asciidoctor --version
-          docker run -it sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }} gulp --version
+          docker run -i sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }} antora --version
+          docker run -i sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }} asciidoctor --version
+          docker run -i sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }} gulp --version
 
       - name: Run Snyk to check Docker image for vulnerabilities
         continue-on-error: true
