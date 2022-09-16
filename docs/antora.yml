@@ -1,7 +1,7 @@
 ---
 name: docker-images-adoc-antora
 title: Docker Image adoc-antora
-version: feat__auto-update-dockerhub-desc
+version: main
 start_page: ROOT:index.adoc
 nav:
   - modules/ROOT/nav.adoc
