@@ -173,7 +173,7 @@ jobs:
           image: sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }}
           args: --file=src/main/Dockerfile
 
-      - name: Upload snyk result to GitHub Code Scanning (feature branch)
+      - name: Upload snyk result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: snyk.sarif
