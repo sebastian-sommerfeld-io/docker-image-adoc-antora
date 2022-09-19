@@ -48,8 +48,9 @@ To build Antora documentation pages and run a webserver to publish these pages f
 [source, Dockerfile]
 ----
 # Stage 1: build
-# Build Antora pages based on repositories from playbook. Contents are cloned from remote repositories because
-# project files from local machine (the docker-hosts) filesystem are not present inside container.
+# Build Antora pages based on repositories from playbook. Contents are
+# cloned from remote repositories because project files from local machine
+# (the docker-hosts)filesystem are not present inside container.
 FROM sommerfeldio/adoc-antora:latest AS build
 LABEL maintainer="sebastian@sommerfeld.io"
 
