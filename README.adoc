@@ -17,7 +17,7 @@
 // |                                         |
 // +-----------------------------------------+
 
-Docker image for all link:https://antora.org[Antora] and link:https://docs.asciidoctor.org/asciidoc/latest[Asciidoc] tasks.
+Docker image for link:https://antora.org[Antora] and link:https://docs.asciidoctor.org/asciidoc/latest[Asciidoc] tasks.
 
 image:{github-actions-url}/{job-generate-docs}/{badge}[Github Badge, link={github-actions-url}/{job-generate-docs}]
 image:{github-actions-url}/{job-ci}/{badge}[Github Badge, link={github-actions-url}/{job-ci}]
@@ -31,7 +31,7 @@ image:{github-actions-url}/{job-release}/{badge}[Github Badge, link={github-acti
 |Docker Registry |https://hub.docker.com/r/sommerfeldio/{image-name}
 |===
 
-This image is used to for link:https://docs.cloud.sommerfeld.io[docs.cloud.sommerfeld.io]. See https://github.com/sebastian-sommerfeld-io/website-sommerfeld-io for details.
+This image is used to build the HTML contents from Asciidoc sources for link:https://docs.cloud.sommerfeld.io[docs.cloud.sommerfeld.io]. See https://github.com/sebastian-sommerfeld-io/website-sommerfeld-io for more information regarding the website.
 
 // == Building Block View / Whitebox Overall System
 // Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
