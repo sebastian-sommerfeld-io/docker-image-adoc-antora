@@ -1,54 +1,88 @@
-Docker image for link:https://antora.org[Antora] and link:https://docs.asciidoctor.org/asciidoc/latest[Asciidoc] tasks.
+Docker image for link:https://antora.org[Antora] and link:https://docs.asciidoctor.org/asciidoc/latest[Asciidoc] tasks. 
 
 image:{github-actions-url}/{job-generate-docs}/{badge}[Github Badge, link={github-actions-url}/{job-generate-docs}]
 image:{github-actions-url}/{job-ci}/{badge}[Github Badge, link={github-actions-url}/{job-ci}]
 image:{github-actions-url}/{job-release}/{badge}[Github Badge, link={github-actions-url}/{job-release}]
 
-[cols="1,4", options="header"]
-|===
-|What |Where to find
-|Repository |{url-project}
-|Documentation |https://docs.cloud.sommerfeld.io/{project-name}-docs/main
-|Docker Registry |https://hub.docker.com/r/sommerfeldio/{image-name}
-|===
+== Quick reference
+* Github Repository: +
+  {url-project}
+* Documentation: +
+  https://docs.cloud.sommerfeld.io/{project-name}-docs/main
+* Published image artifacts: +
+  https://hub.docker.com/r/sommerfeldio/{image-name}
+* Docker image tag scheme: +
+  See link:http://docs.cloud.sommerfeld.io/infrastructure-docs/main/GUIDELINES/index.html#_version_tags[Guidelines and Conventions] on docs.cloud.sommerfeld.io
+* Where to file issues: +
+  {url-project}/issues
 
-This image is used to build the HTML contents from Asciidoc sources for link:https://docs.cloud.sommerfeld.io[docs.cloud.sommerfeld.io]. See https://github.com/sebastian-sommerfeld-io/website-sommerfeld-io for more information regarding the website.
+== What is `adoc-antora`?
+The `adoc-antora image` is a utility Docker image used to build the HTML contents from Asciidoc sources for link:https://docs.cloud.sommerfeld.io[docs.cloud.sommerfeld.io] (see link:https://github.com/sebastian-sommerfeld-io/website-sommerfeld-io[`sebastian-sommerfeld-io/website-sommerfeld-io` on Github] for more information about this website). 
 
-// == Building Block View / Whitebox Overall System
-// Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+This image is not specific to docs.cloud.sommerfeld.io and can be used to generate Antora docs from other antora playbooks. The image is not even limited to Antora and can handle Asciidoctor tasks as well.
 
-== Requirements Overview
-These requirements apply to all docker images on top of their own requirements.
+To see which packages are shipped with this image, take a look at the link:https://github.com/sebastian-sommerfeld-io/docker-image-adoc-antora/blob/main/src/main/Dockerfile[Dockerfile].
 
-. Image is pushed to DockerHub
-. Apply the versioning scheme defined in link:http://localhost:7888/infrastructure-docs/main/GUIDELINES/index.html#_version_tags[Guidelines and Conventions]
+== How to use this image
+=== Use with a `Dockerfile`
+To build Antora documentation pages and run a webserver to publish these pages first create a Dockerfile. A valid link:https://docs.antora.org/antora/latest/playbook[Antora playbook] is required for successfull Antora builds. This example expects all dependencies (the `antora-playbook.yml` plus the npm `package.json` and `package-lock.json` files) in the same directory as the `Dockerfile`.
+[source, Dockerfile]
+----
+# Stage 1: build
+# Build Antora pages based on repositories from playbook. Contents are cloned from remote repositories because
+# project files from local machine (the docker-hosts) filesystem are not present inside container.
+FROM sommerfeldio/adoc-antora:latest AS build
+LABEL maintainer="sebastian@sommerfeld.io"
 
-== Quality Goals
-. Run test, scans and validations automatically with Github Actions
-.. Everything inside this repo is linted and validated
-.. Docker builds are tested regularly
-.. Container images are scanned for vulerabilities
-. Development with Gitpod inside a browser is possible.
-. Every service runs inside a Docker container.
+ARG PLAYBOOK=antora-playbook.yml
 
-== Install
-// Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+RUN mkdir /antora \
+    && mkdir /antora/target
 
-=== DockerHub Settings
-. Go to "link:https://hub.docker.com[hub.docker.com] -> Account Settings -> Security" and set up an Access Token to use with Github Actions.
-. Go to "link:https://github.com/sebastian-sommerfeld-io/docker-images[repository "docker-images" on github.com] -> Settings -> Secrets -> Actions and add two secrets to log in to DockerHub in a Github Actions pipeline
-.. DOCKERHUB_USER = `sommerfeldio`
-.. DOCKERHUB_USER = `<THE_TOKEN_FROM_DOCKERHUB>`
+COPY ${PLAYBOOK} /antora/${PLAYBOOK}
+COPY package.json /antora/package.json
+COPY package-lock.json /antora/package-lock.json
 
-=== Container Scanning with Snyk
-In order to use the Snyk Action you will need to have a Snyk API token. More details in https://github.com/snyk/actions#getting-your-snyk-token or you can signup for free at https://snyk.io/login.
+WORKDIR /antora
 
-. Create a `SNYK_TOKEN` secret in Github the same way you created the DockerHub secrets.
+RUN antora generate ${PLAYBOOK} --stacktrace --clean --fetch
 
-Snyk can be used to break the build when it detects vulnerabilities. In this case we want to `continue-on-error: true` to upload the issues to GitHub Code Scanning.
+# Stage 2: run
+# Run webserver with the Antora pages (built in previous stage).
+FROM httpd:2.4 AS run
+LABEL maintainer="sebastian@sommerfeld.io"
 
-// == Usage
-// Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+RUN rm /usr/local/apache2/htdocs/index.html
+COPY --from=build /antora/target/docs/public /usr/local/apache2/htdocs
+----
+
+Build this image and start up a container to serve the pages through the Apache httpd webserver.
+[source, sh]
+----
+DOCKER_IMAGE="local/my-antora-website:dev"
+ANTORA_IMAGE="sommerfeldio/adoc-antora:latest"
+
+docker image rm "$ANTORA_IMAGE"
+docker pull "$ANTORA_IMAGE"
+
+docker image rm "$DOCKER_IMAGE"
+docker build --no-cache -t "$DOCKER_IMAGE" .
+
+docker run --rm -p 8000:80 "$DOCKER_IMAGE"
+----
+
+=== Use without a `Dockerfile`
+To use the image without a `Dockerfile` run the following command. This create a `target` directory which contains all generated HTML, CSS, JS, etc.
+[source, sh]
+----
+docker run -it \
+    --volume "$(pwd):$(pwd)" \
+    --workdir "$(pwd)" \
+    sommerfeldio/adoc-antora:latest antora generate antora-playbook.yml --stacktrace --clean --fetch
+----
+
+== Supported architectures
+Currently the Docker images are built for the linux/amd64 target platform. Althoug ci_build images are available for linux/arm64, we do not have other architectures on our roadmap at this point and do not test for linux/arm64.
 
 == Risks and Technical Debts
 Scale for Probability and Impact: Low, Medium and High
