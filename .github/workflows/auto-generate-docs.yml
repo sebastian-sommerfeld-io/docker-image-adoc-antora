@@ -111,11 +111,23 @@ jobs:
     needs: antora-yml
 
     steps:
-      - name: Send build statius to Slack channel
+      - name: Send pipeline status to Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.22.0
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         with:
           channel-id: 'C0438TFQNPM' # pipelines channel
-          slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+          payload: |
+            {
+              "text": "GitHub Action pipeline: ${{ job.status }}\n\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "GitHub Action pipeline: ${{ job.status }}\n\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
