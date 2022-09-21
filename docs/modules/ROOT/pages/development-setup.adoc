@@ -29,3 +29,10 @@ In order to use the Snyk Action you will need to have a Snyk API token. More det
 . Create a `SNYK_TOKEN` secret in Github the same way you created the DockerHub secrets.
 
 Snyk can be used to break the build when it detects vulnerabilities. In this case we want to `continue-on-error: true` to upload the issues to GitHub Code Scanning.
+
+=== Integrate Slack with Github Actions
+Some pipelines send their build status and sometimes other messages to slack. 
+
+. Follow the instructions from https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository[action `slack-send` -> Technique 2: Slack App]
+. For custom messsages use https://github.com/marketplace/actions/slack-send#technique-2-slack-app
+. For build status messages use https://github.com/marketplace/actions/post-workflow-status-to-slack
