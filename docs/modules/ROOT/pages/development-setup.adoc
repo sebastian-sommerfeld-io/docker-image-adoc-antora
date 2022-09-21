@@ -1,10 +1,11 @@
 = Setup Development Environment
+include::ROOT:partial$vars.adoc[]
 
 == Requirements Overview
 These requirements apply to all docker images on top of their own requirements.
 
 . Image is pushed to DockerHub
-. Apply the versioning scheme defined in link:http://docs.cloud.sommerfeld.io/infrastructure-docs/main/GUIDELINES/index.html#_version_tags[Guidelines and Conventions]
+. Apply the versioning scheme defined in link:https://docs.cloud.sommerfeld.io/infrastructure-docs/main/GUIDELINES/index.html#_version_tags[Guidelines and Conventions]
 
 == Quality Goals
 . Run test, scans and validations automatically with Github Actions
@@ -19,7 +20,7 @@ This project is designed for development on a Linux machine (preferrably Ubuntu)
 
 === DockerHub Settings
 . Go to "link:https://hub.docker.com[hub.docker.com] -> Account Settings -> Security" and set up an Access Token to use with Github Actions.
-. Go to "link:https://github.com/sebastian-sommerfeld-io/docker-images[repository "docker-images" on github.com] -> Settings -> Secrets -> Actions and add two secrets to log in to DockerHub in a Github Actions pipeline
+. Go to "link:{url-project}[repository "{project-name}" on github.com] -> Settings -> Secrets -> Actions and add two secrets to log in to DockerHub in a Github Actions pipeline
 .. DOCKERHUB_USER = `sommerfeldio`
 .. DOCKERHUB_USER = `<THE_TOKEN_FROM_DOCKERHUB>`
 
@@ -33,6 +34,6 @@ Snyk can be used to break the build when it detects vulnerabilities. In this cas
 === Integrate Slack with Github Actions
 Some pipelines send their build status and sometimes other messages to slack. 
 
-. Follow the instructions from https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository[action `slack-send` -> Technique 2: Slack App]
-. For custom messsages use https://github.com/marketplace/actions/slack-send#technique-2-slack-app
-. For build status messages use https://github.com/marketplace/actions/post-workflow-status-to-slack
+. Follow the instructions from https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository[action `slack-send` -> Technique 2: Slack App].This creates (among other things) the `SLACK_BOT_TOKEN` secret.
+. For custom messsages use https://github.com/marketplace/actions/slack-send#technique-2-slack-app.
+. For build status messages use https://github.com/marketplace/actions/post-workflow-status-to-slack.

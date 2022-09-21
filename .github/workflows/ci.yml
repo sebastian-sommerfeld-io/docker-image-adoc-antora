@@ -41,7 +41,7 @@ jobs:
         with:
           author_name: sebastian
           author_email: sebastian@sommerfeld.io
-          message: "[Actions Bot] docs: auto-updated linter rules"
+          message: "[Actions Bot] refactor: auto-updated linter rules"
 
   lint-yaml:
     runs-on: ubuntu-latest
