@@ -146,7 +146,7 @@ jobs:
         with:
           node-version: 16
       - name: Install asciidoc-link-check
-        run: npm ci
+        run: npm install --location=global asciidoc-link-check@1.0.15
       - name: Validate links in all adoc files
         run: find . -name '*.adoc' -exec asciidoc-link-check -c .asciidoc-link-check.json -p {} \;
 
@@ -160,6 +160,6 @@ jobs:
         if: always()
         uses: kpritam/slack-job-status-action@v1
         with:
-          job-status: ${{ job.status }}
+          job-status: failure
           slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
           channel: C0438TFQNPM # pipelines channel
