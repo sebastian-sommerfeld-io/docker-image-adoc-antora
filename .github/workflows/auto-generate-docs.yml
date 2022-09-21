@@ -50,7 +50,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    needs: README
 
     steps:
       - name: Checkout code
