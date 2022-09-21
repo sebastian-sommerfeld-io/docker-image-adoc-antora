@@ -1,6 +1,7 @@
 FROM node:18.9.0-bullseye-slim
 LABEL maintainer="sebastian@sommerfeld.io"
 
+# tmp: intentionally break pipeline to test slack msg
 ADD Dockerfile Dockerfile
 
 RUN npm install --location=global @antora/cli@3.1.0 \
