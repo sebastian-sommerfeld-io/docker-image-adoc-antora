@@ -103,3 +103,19 @@ jobs:
           author_email: sebastian@sommerfeld.io
           message: "[Actions Bot] refactor: set antora version to branchname"
           add: docs/antora.yml
+
+  finally:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: antora-yml
+
+    steps:
+      - name: Send build statius to Slack channel
+        id: slack
+        uses: slackapi/slack-github-action@v1.22.0
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        with:
+          channel-id: '@githubactions'
+          slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
