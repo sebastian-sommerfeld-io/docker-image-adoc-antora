@@ -31,7 +31,7 @@ image:{github-actions-url}/{job-release}/{badge}[Github Badge, link={github-acti
 * Published image artifacts: +
   https://hub.docker.com/r/sommerfeldio/{image-name}
 * Docker image tag scheme: +
-  See link:http://docs.cloud.sommerfeld.io/infrastructure-docs/main/GUIDELINES/index.html#_version_tags[Guidelines and Conventions] on docs.cloud.sommerfeld.io
+  See link:https://docs.cloud.sommerfeld.io/infrastructure-docs/main/GUIDELINES/index.html#_version_tags[Guidelines and Conventions] on docs.cloud.sommerfeld.io
 * Where to file issues: +
   {url-project}/issues
 
@@ -114,5 +114,5 @@ Scale for Probability and Impact: Low, Medium and High
 |===
 
 == Contact
-Feel free to contact me via sebastian@sommerfeld.io or visit my website link:https://www.sommerfeld.io[www.sommerfeld.io].
+Feel free to contact me via sebastian@sommerfeld.io or visit my website https://www.sommerfeld.io.
 
