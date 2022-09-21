@@ -106,74 +106,13 @@ jobs:
 
   finally:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     needs: antora-yml
 
     steps:
-      - name: Send pipeline status to Slack channel
-        id: slack
-        uses: slackapi/slack-github-action@v1.22.0
+      - name: Send pipeline status to Slack
+        if: always()
+        uses: kpritam/slack-job-status-action@v1
         with:
-          channel-id: 'C0438TFQNPM' # pipelines channel
-          payload: |
-            {
-              "text": "GitHub Action pipeline in repo ${{ github.repository }}: ${{ github.workflow }} = ${{ github.action_status }}",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "GitHub Action pipeline in repo ${{ github.repository }}: ${{ github.workflow }} = ${{ github.action_status }}"
-                  }
-                },
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Repo:*\n${{ github.repository }}"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Started by:*\n${{ github.actor }}"
-                    }
-                  ]
-                },
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Pipeline:*\n${{ github.workflow }}"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Status:*\n${{ github.action_status }}"
-                    }
-                  ]
-                },
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Triggered by:*\n${{ github.event_name }}"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Branch / Tag:*\n${{ github.ref_name }}"
-                    }
-                  ]
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*Commit / Pull Request URL:*\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-                  }
-                }
-              ]
-            }
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          job-status: ${{ job.status }}
+          slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
+          channel: C0438TFQNPM # pipelines channel
