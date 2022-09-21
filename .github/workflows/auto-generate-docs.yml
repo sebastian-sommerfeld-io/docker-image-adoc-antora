@@ -122,6 +122,13 @@ jobs:
               "blocks": [
                 {
                   "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "GitHub Action pipeline in repo ${{ github.repository }}: ${{ github.workflow }} = ${{ github.action_status }}"
+                  }
+                },
+                {
+                  "type": "section",
                   "fields": [
                     {
                       "type": "mrkdwn",
@@ -130,7 +137,12 @@ jobs:
                     {
                       "type": "mrkdwn",
                       "text": "*Started by:*\n${{ github.actor }}"
-                    },
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "fields": [
                     {
                       "type": "mrkdwn",
                       "text": "*Pipeline:*\n${{ github.workflow }}"
@@ -138,7 +150,12 @@ jobs:
                     {
                       "type": "mrkdwn",
                       "text": "*Status:*\n${{ github.action_status }}"
-                    },
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "fields": [
                     {
                       "type": "mrkdwn",
                       "text": "*Triggered by:*\n${{ github.event_name }}"
@@ -148,13 +165,6 @@ jobs:
                       "text": "*Branch / Tag:*\n${{ github.ref_name }}"
                     }
                   ]
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*Repository URL:*\n${{ github.repositoryUrl }}"
-                  }
                 },
                 {
                   "type": "section",
