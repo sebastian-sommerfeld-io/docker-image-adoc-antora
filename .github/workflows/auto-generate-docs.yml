@@ -107,6 +107,7 @@ jobs:
   finally:
     runs-on: ubuntu-latest
     # needs: antora-yml
+    if: always()
 
     steps:
       - name: Send pipeline status to Slack
