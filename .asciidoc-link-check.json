@@ -1,1 +1,6 @@
-sdgdf
+{
+    "ignorePatterns": [
+        { "pattern": "^https://www.sommerfeld.io" },
+        { "pattern": "^https://docs.cloud.sommerfeld.io" }
+    ]
+}
