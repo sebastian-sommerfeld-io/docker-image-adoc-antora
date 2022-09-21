@@ -26,6 +26,7 @@ ls:
   .gitkeep: lowercase
 
 ignore:
+  - .asciidoc-link-check.json
   - .directoryvalidator.json
   - .ls-lint.yml
   - .terraform-docs.yml
