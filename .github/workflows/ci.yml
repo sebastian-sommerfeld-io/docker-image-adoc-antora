@@ -21,21 +21,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Download latest linter rules from infrastructure repo (main branch)
-        run: |
-          echo "Download latest linter definitions"
-          linterDefinitions=(
-            '.folderslintrc'
-            '.ls-lint.yml'
-            '.yamllint.yml'
-          )
-          for file in "${linterDefinitions[@]}"; do
-            echo "Download $file"
-            rm "$file"
-            curl -sL "https://raw.githubusercontent.com/sebastian-sommerfeld-io/infrastructure/main/resources/common-assets/linters/$file" -o "$file"
-            git add "$file"
-          done
-        shell: bash
+      - name: Download latest linter rules
+        uses: sebastian-sommerfeld-io/github-action-download-common-assets@main
       - name: Commit and push
         uses: EndBug/add-and-commit@v9
         with:
