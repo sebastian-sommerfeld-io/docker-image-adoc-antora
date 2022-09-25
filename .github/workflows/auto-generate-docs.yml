@@ -96,7 +96,7 @@ jobs:
       - name: README.adoc
         uses: sebastian-sommerfeld-io/github-action-generate-readme@main
         with:
-          caption: 'Github Action: Generate README.adoc'
+          caption: 'Docker Image: adoc-antora'
       - name: Commit and push
         uses: EndBug/add-and-commit@v9
         with:
