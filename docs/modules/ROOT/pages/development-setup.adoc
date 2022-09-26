@@ -5,7 +5,7 @@ include::ROOT:partial$vars.adoc[]
 These requirements apply to all docker images on top of their own requirements.
 
 . Image is pushed to DockerHub
-. Apply the versioning scheme defined in link:https://docs.cloud.sommerfeld.io/infrastructure-docs/main/GUIDELINES/index.html#_version_tags[Guidelines and Conventions]
+. Apply the versioning scheme defined in link:https://www.sommerfeld.io/docs/projects/infrastructure-docs/main/GUIDELINES/index.html#_version_tags[Guidelines and Conventions]
 
 == Quality Goals
 . Run test, scans and validations automatically with Github Actions

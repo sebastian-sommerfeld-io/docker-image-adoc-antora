@@ -5,13 +5,13 @@ image:{github-actions-url}/{job-ci}/{badge}[Github Badge, link={github-actions-u
 image:{github-actions-url}/{job-release}/{badge}[Github Badge, link={github-actions-url}/{job-release}]
 
 * Github Repository -> {url-project}
-* Documentation -> https://docs.cloud.sommerfeld.io/{project-name}-docs/main
+* Documentation -> https://www.sommerfeld.io/docs/docker-images/{project-name}-docs/main
 * Published Docker images -> https://hub.docker.com/r/sommerfeldio/{image-name}
-* Docker image tag scheme -> link:https://docs.cloud.sommerfeld.io/infrastructure-docs/main/GUIDELINES/index.html#_version_tags[Guidelines and Conventions] on docs.cloud.sommerfeld.io
+* Docker image tag scheme -> link:https://www.sommerfeld.io/docs/projects/infrastructure-docs/main/GUIDELINES/index.html#_version_tags[Guidelines and Conventions] on docs.cloud.sommerfeld.io
 * Where to file issues -> {url-project}/issues
 
 == What is `adoc-antora`?
-The `adoc-antora` image is a utility Docker image used to build the HTML contents from Asciidoc sources for link:https://docs.cloud.sommerfeld.io[docs.cloud.sommerfeld.io] (see link:https://github.com/sebastian-sommerfeld-io/website-sommerfeld-io[`sebastian-sommerfeld-io/website-sommerfeld-io` on Github] for more information about this website). 
+The `adoc-antora` image is a utility Docker image used to build the HTML contents from Asciidoc sources for link:https://www.sommerfeld.io/docs/projects[docs.cloud.sommerfeld.io] (see link:https://github.com/sebastian-sommerfeld-io/website-sommerfeld-io[`sebastian-sommerfeld-io/website-sommerfeld-io` on Github] for more information about this website).
 
 This image is not specific to docs.cloud.sommerfeld.io and can be used to generate Antora docs from other antora playbooks. The image is not even limited to Antora and can handle Asciidoctor tasks as well.
 
