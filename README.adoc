@@ -24,9 +24,9 @@ image:{github-actions-url}/{job-ci}/{badge}[Github Badge, link={github-actions-u
 image:{github-actions-url}/{job-release}/{badge}[Github Badge, link={github-actions-url}/{job-release}]
 
 * Github Repository -> {url-project}
-* Documentation -> https://docs.cloud.sommerfeld.io/{project-name}-docs/main
+* Documentation -> https://www.sommerfeld.io/docs/docker-images/{project-name}-docs/main
 * Published Docker images -> https://hub.docker.com/r/sommerfeldio/{image-name}
-* Docker image tag scheme -> https://www.sommerfeld.io/docs/projects/infrastructure-docs/main/GUIDELINES/index.html#_version_tags[Guidelines and Conventions] on docs.cloud.sommerfeld.io
+* Docker image tag scheme -> link:https://www.sommerfeld.io/docs/projects/infrastructure-docs/main/GUIDELINES/index.html#_version_tags[Guidelines and Conventions] on docs.cloud.sommerfeld.io
 * Where to file issues -> {url-project}/issues
 
 == What is `adoc-antora`?
