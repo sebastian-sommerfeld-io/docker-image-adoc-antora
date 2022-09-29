@@ -11,21 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Get current tag name
         id: vars
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
-
       - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Re-Tag image sommerfeldio/adoc-antora from :release-candidate to :${{ steps.vars.outputs.tag }} and :latest
         run: |
           VERSION_TAG="$(cut -d "v" -f2 <<< ${{ steps.vars.outputs.tag }})"
@@ -41,17 +37,14 @@ jobs:
   docker-hub-description:
     runs-on: ubuntu-latest
     needs: release-image
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Convert README from asciidoc to markdown for DockerHub description
         run: |
           sudo apt-get install -y pandoc asciidoc
           asciidoc -b docbook README.adoc
           pandoc -f docbook -t markdown_strict README.xml -o README.md
-
       - name: Update DockerHub description
         uses: peter-evans/dockerhub-description@v3
         with:

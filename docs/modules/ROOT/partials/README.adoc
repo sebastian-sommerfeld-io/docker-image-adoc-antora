@@ -7,15 +7,15 @@ image:{github-actions-url}/{job-release}/{badge}[Github Badge, link={github-acti
 * Github Repository -> {url-project}
 * Documentation -> https://www.sommerfeld.io/docs/docker-images/{project-name}-docs/main
 * Published Docker images -> https://hub.docker.com/r/sommerfeldio/{image-name}
-* Docker image tag scheme -> link:https://www.sommerfeld.io/docs/projects/infrastructure-docs/main/GUIDELINES/index.html#_version_tags[Guidelines and Conventions] on docs.cloud.sommerfeld.io
+* Docker image tag scheme -> link:https://www.sommerfeld.io/docs/projects/infrastructure-docs/main/GUIDELINES/index.html#_version_tags[Guidelines and Conventions] on www.sommerfeld.io
 * Where to file issues -> {url-project}/issues
 
-== What is `adoc-antora`?
-The `adoc-antora` image is a utility Docker image used to build the HTML contents from Asciidoc sources for link:https://www.sommerfeld.io/docs/projects[docs.cloud.sommerfeld.io] (see link:https://github.com/sebastian-sommerfeld-io/website-sommerfeld-io[`sebastian-sommerfeld-io/website-sommerfeld-io` on Github] for more information about this website).
+== What is `{image-name}`?
+The `{image-name}` image is a utility Docker image used to build the HTML contents from Asciidoc sources for link:https://www.sommerfeld.io/docs/projects[www.sommerfeld.io] (see link:https://github.com/sebastian-sommerfeld-io/website-sommerfeld-io[`sebastian-sommerfeld-io/website-sommerfeld-io` on Github] for more information about this website).
 
-This image is not specific to docs.cloud.sommerfeld.io and can be used to generate Antora docs from other antora playbooks. The image is not even limited to Antora and can handle Asciidoctor tasks as well.
+This image is not specific to www.sommerfeld.io and can be used to generate Antora docs from other antora playbooks. The image is not even limited to Antora and can handle Asciidoctor tasks as well.
 
-To see which packages are shipped with this image, take a look at the link:https://github.com/sebastian-sommerfeld-io/docker-image-adoc-antora/blob/main/src/main/Dockerfile[Dockerfile].
+To see which packages are shipped with this image, take a look at the link:https://github.com/sebastian-sommerfeld-io/{project-name}/blob/main/src/main/Dockerfile[Dockerfile].
 
 == How to use this image
 === Use with a `Dockerfile`
@@ -76,9 +76,6 @@ To use the image without a `Dockerfile` run the following command. This create a
     --workdir "$(pwd)" \
     sommerfeldio/adoc-antora:latest antora generate antora-playbook.yml --stacktrace --clean --fetch
 ----
-
-== Supported architectures
-Currently the Docker images are built for the linux/amd64 target platform. Althoug ci_build images are available for linux/arm64, we do not have other architectures on our roadmap at this point and do not test for linux/arm64.
 
 == Risks and Technical Debts
 Scale for Probability and Impact: Low, Medium and High
