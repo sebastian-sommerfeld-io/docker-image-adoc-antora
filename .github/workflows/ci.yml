@@ -122,8 +122,8 @@ jobs:
           echo "tag = $TAG"
           echo "::set-output name=DOCKER_TAG::$TAG"
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+      # - name: Set up QEMU
+      #   uses: docker/setup-qemu-action@v2
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -138,7 +138,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./src/main
-          platforms: linux/amd64, linux/arm64
+          platforms: linux/amd64
           push: true
           tags: sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }}
 
