@@ -70,7 +70,7 @@ docker run --rm -p 8000:80 "$DOCKER_IMAGE"
 To use the image without a `Dockerfile` run the following command. This create a `/tmp/antora` directory which contains all generated HTML, CSS, JS, etc.
 [source, sh]
 ----
-  docker run -it \
+  docker run -it --rm \
     --volume "$(pwd):$(pwd)" \
     --volume "/tmp/antora:/tmp/antora" \
     --workdir "$(pwd)" \
