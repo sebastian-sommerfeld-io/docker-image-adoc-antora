@@ -1,7 +1,7 @@
 ---
 name: docker-images-adoc-antora
 title: Docker Image adoc-antora
-version: main
+version: feat__pipeline-cleanup
 start_page: ROOT:index.adoc
 nav:
   - modules/ROOT/nav.adoc
