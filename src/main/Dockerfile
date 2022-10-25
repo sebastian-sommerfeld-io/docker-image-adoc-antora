@@ -1,4 +1,4 @@
-FROM node:18.9.0-bullseye-slim
+FROM node:19.0.0-bullseye-slim
 LABEL maintainer="sebastian@sommerfeld.io"
 
 RUN npm install --location=global @antora/cli@3.1.0 \
