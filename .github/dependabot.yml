@@ -1,0 +1,6 @@
+version: 2
+updates:
+  - package-ecosystem: "Docker" # See documentation for possible values
+    directory: "src/main"
+    schedule:
+      interval: "daily"
