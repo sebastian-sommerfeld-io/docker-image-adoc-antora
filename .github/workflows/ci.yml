@@ -98,6 +98,7 @@ jobs:
 
       - name: Login to DockerHub
         uses: docker/login-action@v2
+        if: ${{ github.actor != 'dependabot[bot]' }}
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -107,7 +108,7 @@ jobs:
         with:
           context: ./src/main
           platforms: linux/amd64
-          push: true
+          push: ${{ github.actor != 'dependabot[bot]' }}
           tags: sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }}
 
       - name: Run container and print versions of installed packages
@@ -123,6 +124,7 @@ jobs:
       - name: Run Snyk to check Docker image for vulnerabilities
         continue-on-error: true
         uses: snyk/actions/docker@master
+        if: ${{ github.actor != 'dependabot[bot]' }}
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
