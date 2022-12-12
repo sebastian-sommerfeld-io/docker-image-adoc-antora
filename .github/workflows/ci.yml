@@ -133,6 +133,7 @@ jobs:
 
       - name: Upload snyk result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
+        if: ${{ github.actor != 'dependabot[bot]' }}
         with:
           sarif_file: snyk.sarif
 
