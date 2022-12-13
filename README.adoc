@@ -71,7 +71,7 @@ RUN rm /usr/local/apache2/htdocs/index.html
 COPY --from=build /antora/target/docs/public /usr/local/apache2/htdocs
 ----
 
-Build a custom image and start up a container to serve the pages through the Apache httpd webserver.
+Then build this custom image (the Dockerfile above) and start up a Docker container to serve the html pages through the Apache httpd webserver.
 
 [source, sh]
 ----
