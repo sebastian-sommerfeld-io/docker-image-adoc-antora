@@ -117,6 +117,7 @@ jobs:
           docker run -i sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }} antora --version
           docker run -i sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }} asciidoctor --version
           docker run -i sommerfeldio/adoc-antora:${{ steps.vars.outputs.DOCKER_TAG }} gulp --version
+        shell: bash
 
   cd-docker-image:
     runs-on: ubuntu-latest
