@@ -14,7 +14,6 @@ name: Security Scans
 on:
   schedule:
     - cron: '0 1 * * 1' # https://crontab.guru
-  workflow_dispatch:
 
 permissions:
   contents: read
