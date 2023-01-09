@@ -35,8 +35,6 @@ jobs:
         with:
           image: sommerfeldio/adoc-antora:latest
           args: --file=src/main/Dockerfile
-      - name: Debug
-        run: pwd && ls -alF
       - name: Upload snyk result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
